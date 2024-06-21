@@ -87,12 +87,13 @@ options = trainingOptions("sgdm", ...
 % 신경망 훈련
 trainedGN = trainnet(imgsTrain,net,"crossentropy",options);
 
-% GoogLeNet 정확도 평가
+% 정확도 평가
 classNames = categories(imgsTrain.Labels);
 scores = minibatchpredict(trainedGN,imgsValidation);
 YPred = scores2label(scores,classNames);
 accuracy = mean(YPred==imgsValidation.Labels);
 disp("GoogLeNet Accuracy: "+num2str(100*accuracy)+"%")
+% ACC: 87.5%
 
 % 활성화 결과 생성
 trainedGN.Layers(1:5)
@@ -189,3 +190,4 @@ scores = minibatchpredict(trainedSN,augimgsValidation);
 YPred = scores2label(scores,classNames);
 accuracy = mean(YPred==imgsValidation.Labels);
 disp("SqueezeNet Accuracy: "+num2str(100*accuracy)+"%")
+% ACC: 84.375%
